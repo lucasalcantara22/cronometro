@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro</title>
+
+    <style>
+
+        body{
+            /*background-color: #0400ff;*/
+            background-color: #000000;
+        }
+
+        .container{
+            text-align: center;
+            margin-top: 260px;
+
+        }
+
+        h1{
+            font-size: 50px;
+            color: #ffffff;
+        }
+
+        button{
+            font-size: 19.6px;
+            height: 40px;
+            width: 80px;
+            border: 4px double #000000;
+            color: #000000;
+            cursor: pointer;
+        }
+
+        .Inicio{
+            background-color: #09ff00;
+        }
+
+        .Pausar{
+            background-color:#fbff00
+        }
+
+        .Stop{
+            background-color: #ff0000;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <h1 id="contador">00:00:00</h1>
+        <button class="Inicio" onclick="init()">Inicio</button>
+        <button class="Pausar" onclick="pausar()">Pausar</button>
+        <button class="Stop" onclick="zerar()">zerar</button>
+
+    </div>
+
+    <script>
+
+const contadorDocumento = document.querySelector("#contador");
+        let segundos = 0;
+        let minutos = 0;
+        let horas = 0;
+        let intervalo;
+
+        function init() {
+            contador();
+            intervalo = setInterval(contador, 1000);
+        }
+
+        const pausar = () => {
+            clearInterval(intervalo);
+        }
+
+        const zerar = () => {
+            clearInterval(intervalo);
+            segundos = 0;
+            minutos = 0;
+            contadorDocumento.innerHTML = "00:00:00";
+        }
+
+        const digitoZero = (digito) => {
+            if (digito <10) {
+                return `0${digito}`
+            } else{
+                return digito
+            }
+        }
+
+        function contador() {
+            segundos++;
+
+            if (segundos === 60) {
+                minutos++;
+                segundos =0;
+            }
+
+            if (minutos === 60) {
+                minutos = 0;
+                horas++;
+            }
+
+            contadorDocumento.innerHTML = digitoZero(horas) + ":" + digitoZero(minutos) + ":" + digitoZero(segundos);
+
+        }
+
+    </script>
+
+</body>
+</html>
